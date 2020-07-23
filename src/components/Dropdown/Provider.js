@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 
-const Context = React.createContext();
+export const Context = React.createContext();
 
 export function DropdownProvider({ children }) {
   const [options, setOptions] = useState([]);
@@ -26,7 +26,7 @@ export function DropdownProvider({ children }) {
     ])
   }, [setOptions]);
 
-  const updateOptionsProps = useCallback((optionId, props) => {
+  const updateOptionProps = useCallback((optionId, props) => {
     setOptions(items => 
         items.map(item => {
           if(item.id === optionId) {
@@ -53,7 +53,7 @@ export function DropdownProvider({ children }) {
     <Context.Provider
       value={{
         registerOption,
-        updateOptionsProps,
+        updateOptionProps,
         getOptionById,
         deleteOptionById,
         options,
