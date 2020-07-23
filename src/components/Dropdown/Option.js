@@ -49,6 +49,8 @@ export function DropdownOption({ name, content: Content, backgroundHeight }) {
     }
   }, [backgroundHeight, id, optionDimensions, registerOption, registered, updateOptionProps]);
 
+  useEffect(() => deleteOptionById(id), [deleteOptionById, id]);
+
   const handleOpen = () => setTargetId(id);
   const handleClose = () => setTargetId(null);
   const handleTouch = () => setTargetId(window.isMobile = true);

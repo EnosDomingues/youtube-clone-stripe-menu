@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useState } from 'react';
+import React, { useContext, useMemo, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 import { Context } from './Provider';
@@ -35,8 +35,31 @@ export function DropdownRoot() {
     }, 15)
   }
 
+  // Active timeout
+  useEffect(() => {
+    if(isActive) return;
+
+    let timeout = setTimeout(
+      () => setHasInteracted(false),
+      refDuration * 1000 * 0.9,
+    );
+     
+    return () => clearTimeout(timeout);
+  }, [isActive]);
+
   return (
-     <div className="dropdown-root">
+     <div style={{ perspective: 2000 }}>
+       <motion.div
+      className="dropdown-root"
+      animate={{
+        opacity: isActive ? 1 : 0,
+        rotateX: isActive ? 0 : -15,
+      }}
+      transition={{
+        opacity: { duration: refDuration, delay: 0.05 },
+        rotateX: { duration: refDuration, delay: 0.05 },
+      }}
+     >
        <motion.div 
         className="dropdown-container"
         animate={{
@@ -55,6 +78,8 @@ export function DropdownRoot() {
         onHoverStart={() => setHovering(true)}
         onHoverEnd={() => setHovering(false)}
        >
+         <DropdownBackground  />
+
          <motion.div
           animate={{
             x: -x,
@@ -70,6 +95,7 @@ export function DropdownRoot() {
        </motion.div> 
 
        <DropdownArrow isFirstInteraction={isFirstInteraction} />
+     </motion.div>
      </div>
     );
 }
@@ -99,3 +125,24 @@ function DropdownArrow({ isFirstInteraction }) {
      />
    )
 }
+
+export function DropdownBackground() { 
+  const { cachedId, getOptionById } =  useContext(Context);
+
+  const cachedOption = useMemo(() => getOptionById(cachedId), [cachedId, getOptionById]);
+
+  const backgroundHeight =  cachedOption?.backgroundHeight || 0;
+
+  return (
+    <motion.div 
+      className="dropdown-background"
+      animate={{ 
+        height: backgroundHeight
+      }}
+      transition={{
+        ease: 'easeOut',
+        duration: refDuration,
+      }}
+    />
+  )
+} 
