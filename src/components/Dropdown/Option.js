@@ -21,7 +21,7 @@ export function DropdownOption({ name, content: Content, backgroundHeight }) {
         const contentRef = useRef();
 
         useEffect(() => {
-          const contentDimensions = contentRef.current.getBoudingClientRect();
+          const contentDimensions = contentRef.current.getBoundingClientRect();
           updateOptionProps(id, { contentDimensions } );
         }, []);
 
@@ -49,8 +49,28 @@ export function DropdownOption({ name, content: Content, backgroundHeight }) {
     }
   }, [backgroundHeight, id, optionDimensions, registerOption, registered, updateOptionProps]);
 
+  const handleOpen = () => setTargetId(id);
+  const handleClose = () => setTargetId(null);
+  const handleTouch = () => setTargetId(window.isMobile = true);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+
+    return targetId === id ? handleClose() : handleOpen();
+  }
+
   return (
-    <motion.button class="dropdown-option" ref={optionHook}>
+    <motion.button 
+      className="dropdown-option" 
+      ref={optionHook}
+      onMouseDown={handleClick}
+      onHoverStart={() => !window.isMobile && handleOpen()}
+      onHoverEnd={() => !window.isMobile && handleClose()}
+      onTouchStart={handleTouch}
+      onFocus={handleOpen}
+      onBlur={handleClose}
+    >
+
       {name}
     </motion.button>
   ) 
