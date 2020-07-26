@@ -3,7 +3,7 @@ UI Clone - Twitter Responsive
 </h1>
 
 <p align="center">Stripe Menu Clone for study purposes.</p>
-<p align="center">Deployed <a href="https://stupefied-benz-1b0af3.netlify.app//">here</a>.</p>
+<p align="center">Deployed <a href="https://hungry-rosalind-64f65e.netlify.app/">here</a>.</p>
 
 <p align="center">
   <a href="https://github.com/EnosDomingues/twitter-clone-layout/graphs/contributors">
