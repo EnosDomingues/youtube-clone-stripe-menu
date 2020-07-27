@@ -1,12 +1,12 @@
 <h1 align="center">
-UI Clone - Twitter Responsive
+UI Clone - Stripe Menu
 </h1>
 
 <p align="center">Stripe Menu Clone for study purposes.</p>
 <p align="center">Deployed <a href="https://hungry-rosalind-64f65e.netlify.app/">here</a>.</p>
 
 <p align="center">
-  <a href="https://github.com/EnosDomingues/twitter-clone-layout/graphs/contributors">
+  <a href="https://github.com/EnosDomingues/youtube-clone-stripe-menu/graphs/contributors">
     <img src="https://img.shields.io/badge/contributors-1-blue" alt="Contributors">
   </a>
   <a href="https://opensource.org/licenses/MIT">
